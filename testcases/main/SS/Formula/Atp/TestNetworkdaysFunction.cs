@@ -36,15 +36,15 @@ namespace TestCases.SS.Formula.Atp
         private static int MARCH = 3;
         private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-        private static String STARTING_DATE = formatter.Format(new DateTime(2008, OCTOBER, 1), CultureInfo.CurrentCulture);
+        private static String STARTING_DATE = formatter.Format(new DateTime(2008, OCTOBER, 1), CultureInfo.InvariantCulture);
 
-        private static String END_DATE = formatter.Format(new DateTime(2009, MARCH, 1), CultureInfo.CurrentCulture);
+        private static String END_DATE = formatter.Format(new DateTime(2009, MARCH, 1), CultureInfo.InvariantCulture);
 
-        private static String FIRST_HOLIDAY = formatter.Format(new DateTime(2008, NOVEMBER, 26), CultureInfo.CurrentCulture);
+        private static String FIRST_HOLIDAY = formatter.Format(new DateTime(2008, NOVEMBER, 26), CultureInfo.InvariantCulture);
 
-        private static String SECOND_HOLIDAY = formatter.Format(new DateTime(2008, DECEMBER, 4), CultureInfo.CurrentCulture);
+        private static String SECOND_HOLIDAY = formatter.Format(new DateTime(2008, DECEMBER, 4), CultureInfo.InvariantCulture);
 
-        private static String THIRD_HOLIDAY = formatter.Format(new DateTime(2009, JANUARY, 21), CultureInfo.CurrentCulture);
+        private static String THIRD_HOLIDAY = formatter.Format(new DateTime(2009, JANUARY, 21), CultureInfo.InvariantCulture);
 
         private static OperationEvaluationContext EC = new OperationEvaluationContext(null, null, 1, 1, 1, null);
         [Test]

@@ -17,7 +17,7 @@ before_build:
 
 build_script:
 - for /f "tokens=1,* delims=-" %%a in ('"git describe --tags --long"') do set version_suffix=%%b
-- msbuild Solution\vCards.sln /p:VersionSuffix="%version_suffix%-%CONFIGURATION%"
+- msbuild solution\NPOI.sln /p:VersionSuffix="%version_suffix%-%CONFIGURATION%"
 
 artifacts:
 - path: solution\Lib\$(configuration)\*.nupkg

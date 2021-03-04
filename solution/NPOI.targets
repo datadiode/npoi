@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(TargetName)' != 'NPOI'">
+    <Exec Command="cd /d &quot;$(SolutionDir)Lib\$(ConfigurationName)&quot;&#xD;&#xA;&quot;$(MSBuildBinPath)\msbuild&quot; -t:Pack -p:NoBuild=true -p:Configuration=&quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot;&#xD;&#xA;for %%f in ($(TargetName).*.nupkg) do set nupkg=:%%f&#xD;&#xA;&quot;%ProgramFiles%\7-Zip\7z.exe&quot; x %nupkg::$(TargetName)=$(TargetName)% lib&#xD;&#xA;&quot;%ProgramFiles%\7-Zip\7z.exe&quot; a %nupkg::$(TargetName)=NPOI% lib&#xD;&#xA;del /s /q lib&#xD;&#xA;del /q %nupkg::$(TargetName)=$(TargetName)%&#xD;&#xA;" />
+  </Target>
+</Project>

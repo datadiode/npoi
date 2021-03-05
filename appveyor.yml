@@ -22,7 +22,7 @@ build_script:
 - msbuild solution\NPOI.Test.sln /p:VersionSuffix="%version_suffix%-%CONFIGURATION%"
 
 after_build:
-- appveyor PushArtifact solution\Lib\$(configuration)\*.nupkg
+- appveyor PushArtifact solution\Lib\%CONFIGURATION%\*.nupkg
 
 test_script:
 - vstest.console.exe /logger:Appveyor /Settings:"testcases\test.dotnet.runsettings" "solution\Lib\%CONFIGURATION%\*.TestCases.dll"

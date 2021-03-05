@@ -14,4 +14,5 @@
     <Parameter name="font.metrics.filename" value="../../../testcases/test-data/font_metrics.properties"/>
     <Parameter name="escher.data.path" value="../../../testcases/test-data/ddf/"/>
   </TestRunParameters>
+  <MaxCpuCount>1</MaxCpuCount>
 </RunSettings>

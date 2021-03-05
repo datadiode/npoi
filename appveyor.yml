@@ -22,8 +22,8 @@ build_script:
 - msbuild solution\NPOI.Test.sln /p:VersionSuffix="%version_suffix%-%CONFIGURATION%"
 
 test_script:
-- vstest.console.exe /Settings:"testcases\test.dotnet.runsettings" "solution\Lib\%CONFIGURATION%\NPOI.TestCases.dll"
-- vstest.console.exe /Settings:"testcases\test.dotnet.runsettings" "solution\Lib\%CONFIGURATION%\NPOI.OOXML.Testcases.dll"
+- vstest.console.exe /logger:Appveyor /Settings:"testcases\test.dotnet.runsettings" "solution\Lib\%CONFIGURATION%\NPOI.TestCases.dll"
+- vstest.console.exe /logger:Appveyor /Settings:"testcases\test.dotnet.runsettings" "solution\Lib\%CONFIGURATION%\NPOI.OOXML.Testcases.dll"
 
 artifacts:
 - path: solution\Lib\$(configuration)\*.nupkg

@@ -7,17 +7,19 @@ configuration:
 
 platform: Any CPU
 
-test: off
+test: on
 
 environment:
   EnableNuGetPackageRestore: true
 
 before_build:
 - nuget restore solution\NPOI.sln
+- nuget restore solution\NPOI.Test.sln
 
 build_script:
 - for /f "tokens=1,* delims=-" %%a in ('"git describe --tags --long"') do set version_suffix=%%b
 - msbuild solution\NPOI.sln /p:VersionSuffix="%version_suffix%-%CONFIGURATION%"
+- msbuild solution\NPOI.Test.sln /p:VersionSuffix="%version_suffix%-%CONFIGURATION%"
 
 artifacts:
 - path: solution\Lib\$(configuration)\*.nupkg

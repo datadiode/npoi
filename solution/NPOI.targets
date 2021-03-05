@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(TargetName)' != 'NPOI'">
-    <Exec Command="cd /d &quot;$(SolutionDir)Lib\$(Configuration)&quot;&#xD;&#xA;dir&#xD;&#xA;&quot;$(MSBuildBinPath)\msbuild&quot; -t:Pack -p:NoBuild=true -p:Platform=&quot;$(Platform)&quot; -p:Configuration=&quot;$(Configuration)&quot; /p:VersionSuffix=&quot;$(VersionSuffix)&quot; &quot;$(ProjectPath)&quot;&#xD;&#xA;dir&#xD;&#xA;for %%f in ($(TargetName).*.nupkg) do set nupkg=:%%f&#xD;&#xA;&quot;%ProgramW6432%\7-Zip\7z.exe&quot; x &quot;%nupkg::$(TargetName)=$(TargetName)%&quot; lib&#xD;&#xA;&quot;%ProgramW6432%\7-Zip\7z.exe&quot; a &quot;%nupkg::$(TargetName)=NPOI%&quot; lib&#xD;&#xA;del /s /q lib&#xD;&#xA;del /q %nupkg::$(TargetName)=$(TargetName)%&#xD;&#xA;" />
+  <!--
+   ! Merges fallouts of hosting projects into a single NuGet package
+   ! Relies on one of the projects sharing its name with the hosting solution
+   ! Assumes 7-Zip 64-bit to be installed to its default location
+   ! Copyright (c) datadiode
+   ! SPDX-License-Identifier: MIT
+   !-->
+  <Target Name="MergePack1" AfterTargets="PostBuildEvent" Condition="'$(TargetName)' == '$(SolutionName)'">
+    <Exec Command="cd /d &quot;$(SolutionDir)Lib\$(Configuration)&quot;&#xD;&#xA;&quot;$(MSBuildBinPath)\msbuild&quot; -t:Pack -p:NoBuild=true -p:Platform=&quot;$(Platform)&quot; -p:Configuration=&quot;$(Configuration)&quot; /p:VersionSuffix=&quot;$(VersionSuffix)&quot; &quot;$(ProjectPath)&quot;&#xD;&#xA;" />
+  </Target>
+  <Target Name="MergePack2" AfterTargets="PostBuildEvent" Condition="'$(TargetName)' != '$(SolutionName)'">
+    <Exec Command="cd /d &quot;$(SolutionDir)Lib\$(Configuration)&quot;&#xD;&#xA;&quot;$(MSBuildBinPath)\msbuild&quot; -t:Pack -p:NoBuild=true -p:Platform=&quot;$(Platform)&quot; -p:Configuration=&quot;$(Configuration)&quot; /p:VersionSuffix=&quot;$(VersionSuffix)&quot; &quot;$(ProjectPath)&quot;&#xD;&#xA;for %%f in ($(TargetName).*.nupkg) do set nupkg=:%%f&#xD;&#xA;&quot;%ProgramW6432%\7-Zip\7z.exe&quot; x &quot;%nupkg::$(TargetName)=$(TargetName)%&quot; lib&#xD;&#xA;&quot;%ProgramW6432%\7-Zip\7z.exe&quot; a &quot;%nupkg::$(TargetName)=$(SolutionName)%&quot; lib&#xD;&#xA;del /s /q lib&#xD;&#xA;del /q %nupkg::$(TargetName)=$(TargetName)%&#xD;&#xA;" />
   </Target>
 </Project>

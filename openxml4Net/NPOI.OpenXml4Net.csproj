@@ -115,12 +115,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\main\NPOI.csproj">
-      <Project>{10fa8538-157a-4380-a4f6-8e2c3ee92cae}</Project>
-      <Name>NPOI</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\main\NPOI.csproj" />
   </ItemGroup>
-  <Import Project="..\solution\NPOI.targets" />
+  <Import Condition="'$(SolutionName)'=='NPOI'" Project="..\solution\NPOI.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -139,6 +139,14 @@ namespace NPOI.HWPF
         }
 
 
+        public override void Write()
+        {
+            throw new InvalidOperationException("Writing is not available for the older file formats");
+        }
+        public override void Write(FileInfo newFile)
+        {
+            throw new InvalidOperationException("Writing is not available for the older file formats");
+        }
         public override void Write(Stream out1)
         {
             throw new InvalidOperationException("Writing is not available for the older file formats");

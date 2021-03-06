@@ -522,6 +522,23 @@ namespace NPOI.HWPF
             return _officeDrawingsMain;
         }
 
+        public override void Write()
+        {
+            throw new InvalidOperationException("Writing is not available");
+        }
+
+        public override void Write(FileInfo newFile)
+        {
+            var fs = File.Create(newFile.FullName);
+            try
+            {
+                Write(fs);
+            }
+            finally
+            {
+                fs.Close();
+            }
+        }
         /**
          * Writes out the word file that is represented by an instance of this class.
          *

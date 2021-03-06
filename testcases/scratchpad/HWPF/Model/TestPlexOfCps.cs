@@ -38,7 +38,7 @@ namespace NPOI.HWPF.Model
             {
                 byte[] intHolder = new byte[4];
                 int span = (int)(110.0f * (new Random((int)DateTime.Now.Ticks).Next(0,100)/100.0));
-                LittleEndian.PutInt(intHolder, span);
+                LittleEndian.PutInt(intHolder, 0, span);
                 _plexOfCps.AddProperty(new GenericPropertyNode(last, last + span, intHolder));
                 last += span;
             }
